@@ -21,3 +21,20 @@ export function* range(start: number, limit: number) {
   }
   yield count;
 }
+
+export class Counter<T extends string | number> {
+  results: Record<T, number>;
+  constructor() {
+    this.results = {} as Record<T, number>;
+  }
+  add(value: T) {
+    if (value in this.results) {
+      this.results[value]++;
+    } else {
+      this.results[value] = 1;
+    }
+  }
+  getCount(value: T) {
+    return value in this.results ? this.results[value] : 0;
+  }
+}
